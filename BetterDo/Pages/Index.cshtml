@@ -8,3 +8,26 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>
+
+<h2>List</h2>
+<div id="dvItems" style="font-size:24px;">
+</div>
+
+<script>
+    $.ajax({
+    type: "GET",
+    url: "/Index?handler=List",
+    contentType: "application/json",
+    dataType: "json",
+    success: function (response) {
+        var dvItems = $("#dvItems");
+        dvItems.empty();
+        $.each(response, function (i, item) {
+            var $tr = $('<li>').append(item).appendTo(dvItems);
+        });
+    },
+    failure: function (response) {
+        alert(response);
+    }
+});
+</script>
